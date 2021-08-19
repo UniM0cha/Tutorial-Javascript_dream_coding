@@ -22,3 +22,10 @@ const rabbit = {
 
 json = JSON.stringify(rabbit);
 console.log(json);
+
+json = JSON.stringify(rabbit, ['name']);
+console.log(json);
+
+json = JSON.stringify(rabbit, (key, value) => {
+  return key === 'name' ? 'ellie' : value;
+});
