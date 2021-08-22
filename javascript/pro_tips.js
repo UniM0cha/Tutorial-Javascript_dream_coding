@@ -96,7 +96,7 @@ const fruits2 = ['멜론', '복숭아', '파인애플'];
 // let combined = fruits.concat(fruits2);
 let combined = [...fruits, ...fruits2];
 
-// Opthinal Chaining
+// Optional Chaining
 const bob = {
   name: 'Julia',
   age: 20,
@@ -132,6 +132,9 @@ function displayJobTitle(person) {
 // Looping
 const items = [1, 2, 3, 4, 5, 6];
 const evens = getAllEvens(items);
+const multiple = multyplyByFour(evens);
+const sum = sumArray(multiple);
+console.log(sum);
 
 // Bad Code
 function getAllEvens(items) {
@@ -143,10 +146,40 @@ function getAllEvens(items) {
   }
   return result;
 }
+// +당신들이 생각하는 그 복잡한 코드들....
 
 // Good code
-function getAllEvens(items) {
-  return items.filter((num) => num % 2 === 0);
+const evens = items.filter((num) => num % 2 === 0);
+const multiple = evens.map((num) => num * 4);
+const sum = multiple.reducs((a, b) => a + b, 0);
+console.log(sum);
+
+// Better code (체이닝)
+const result = items
+  .filter((num) => num % 2 === 0)
+  .map((num) => num * 4)
+  .reducs((a, b) => a + b, 0);
+console.log(result);
+
+// Promise -> async/await
+// Bad code
+function displayUser() {
+  fetchUser() //
+    .then((user) => {
+      fetchProfile(user) //
+        .then((profile) => {
+          updateUI(user, profile);
+        });
+    });
 }
 
-console.log("hello")
+// Good code
+async function displayUser() {
+  const user = await fetchUser();
+  const profile = await fetchProfile(user);
+  updateUI(user, profile);
+}
+
+// 중복 요소 제거하기!
+const array = ['개', '고양이', '강아지', '말', '개', '고양이'];
+const array2 = [...new Set(array)];
